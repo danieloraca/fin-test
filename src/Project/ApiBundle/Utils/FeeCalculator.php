@@ -11,6 +11,8 @@ class FeeCalculator implements FeeCalculatorInterface
     private const TERMS = [12, 24];
     private const MIN_LOAN = 1000;
     private const MAX_LOAN = 20000;
+    private const FEE_STEP = 5;
+    private const LOAN_STEP = 1000;
     private const FEES_GRID = [
         '12' => [
             1000 => 50,
@@ -72,14 +74,14 @@ class FeeCalculator implements FeeCalculatorInterface
         }
 
         $grid = self::FEES_GRID;
-        if ($amount % 1000 === 0) {
+        if ($amount % self::LOAN_STEP === 0) {
             return $grid[$term][$amount];
         }
 
-        $lowAmountRange = floor($amount / 1000) * 1000;
-        $highAmountRange = ceil($amount / 1000) * 1000;
+        $lowAmountRange = floor($amount / self::LOAN_STEP) * self::LOAN_STEP;
+        $highAmountRange = ceil($amount / self::LOAN_STEP) * self::LOAN_STEP;
 
-        $differenceSteps = ($grid[$term][$highAmountRange] - $grid[$term][$lowAmountRange]) / 5;
+        $differenceSteps = ($grid[$term][$highAmountRange] - $grid[$term][$lowAmountRange]) / self::FEE_STEP;
 
         $amountStep = $lowAmountRange;
         if ($grid[$term][$lowAmountRange] !== $grid[$term][$highAmountRange]) {
@@ -91,6 +93,6 @@ class FeeCalculator implements FeeCalculatorInterface
             $stepsToIncrease = floor(($amount - $lowAmountRange) / $amountStep);
         }
 
-        return $grid[$term][$lowAmountRange] + $stepsToIncrease * 5;
+        return $grid[$term][$lowAmountRange] + $stepsToIncrease * self::FEE_STEP;
     }
 }
