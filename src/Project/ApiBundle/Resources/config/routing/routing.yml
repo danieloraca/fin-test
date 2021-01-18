@@ -1,0 +1,6 @@
+main_api:
+  path: /api/{term}/{amount}
+  controller: App\Project\ApiBundle\Controller\PricingController::getPricing
+  format: json
+  methods: [GET]
+

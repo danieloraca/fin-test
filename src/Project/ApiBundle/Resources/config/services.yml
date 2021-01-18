@@ -1,0 +1,10 @@
+services:
+  App\Project\ApiBundle\Controller\:
+    resource: '../../Controller/*'
+    autowire: true
+    autoconfigure: true
+
+  kernel.listener.api_exception:
+    class: App\Project\ApiBundle\EventListener\ApiExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
