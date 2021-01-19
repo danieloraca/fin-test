@@ -33,9 +33,6 @@ class PricingController extends AbstractController
 
     public function getPricing(Request $request): JsonResponse
     {
-        $term = (int) $request->get('term');
-        $amount = (float) $request->get('amount');
-
         try{
             $this->validateParameters($request);
         } catch (InvalidParametersException $e) {
@@ -45,12 +42,18 @@ class PricingController extends AbstractController
             );
         }
 
+        $term = (int) $request->get('term');
+        $amount = (float) $request->get('amount');
+
         $loanApplication = new LoanApplication($term, $amount);
 
         try {
             $fee = $this->feeCalculator->calculate($loanApplication);
         } catch (ParameterRangeException $e) {
-            return new JsonResponse(['error' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(
+                ['error' => $e->getMessage()],
+                JsonResponse::HTTP_BAD_REQUEST
+            );
         }
 
         return new JsonResponse([
@@ -58,13 +61,13 @@ class PricingController extends AbstractController
             'amount' => $this->moneyFormatter->format(
                 new MoneyAmount($amount, self::CURRENCY),
                 [
-                    'show_hundredths' => true
+                    'show_hundredths' => true,
                 ]
             ),
             'fee' => $this->moneyFormatter->format(
                 new MoneyAmount($fee, self::CURRENCY),
                 [
-                    'show_hundredths' => true
+                    'show_hundredths' => true,
                 ]
             ),
         ], JsonResponse::HTTP_OK);

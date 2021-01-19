@@ -34,7 +34,7 @@ class FeeCalculator implements FeeCalculatorInterface
             17000 => 340,
             18000 => 360,
             19000 => 380,
-            20000 => 400
+            20000 => 400,
         ],
         '24' => [
             1000 => 70,
@@ -56,7 +56,7 @@ class FeeCalculator implements FeeCalculatorInterface
             17000 => 680,
             18000 => 720,
             19000 => 760,
-            20000 => 800
+            20000 => 800,
         ],
     ];
 
