@@ -65,10 +65,6 @@ class FeeCalculator implements FeeCalculatorInterface
         $term = $loanApplication->getTerm();
         $amount = $loanApplication->getAmount();
 
-        if (!in_array($term, self::TERMS)) {
-            throw new ParameterRangeException('Term must be 12 or 24');
-        }
-
         if ($amount < self::MIN_LOAN || $amount > self::MAX_LOAN) {
             throw new ParameterRangeException('Loan amount must be between £1000 and £20000.');
         }

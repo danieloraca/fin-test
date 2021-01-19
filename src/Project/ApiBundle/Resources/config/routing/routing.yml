@@ -3,4 +3,7 @@ main_api:
   controller: App\Project\ApiBundle\Controller\PricingController::getPricing
   format: json
   methods: [GET]
+  requirements:
+    term: 12|24
+    amount: '\d+'
 

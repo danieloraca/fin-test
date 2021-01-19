@@ -33,15 +33,6 @@ class PricingController extends AbstractController
 
     public function getPricing(Request $request): JsonResponse
     {
-        try{
-            $this->validateParameters($request);
-        } catch (InvalidParametersException $e) {
-            return new JsonResponse(
-                ['error' => $e->getMessage()],
-                JsonResponse::HTTP_BAD_REQUEST
-            );
-        }
-
         $term = (int) $request->get('term');
         $amount = (float) $request->get('amount');
 
@@ -71,15 +62,5 @@ class PricingController extends AbstractController
                 ]
             ),
         ], JsonResponse::HTTP_OK);
-    }
-
-    private function validateParameters(Request $request): void
-    {
-        $term = (int) $request->get('term');
-        $amount = (float) $request->get('amount');
-
-        if ((string) $term !== $request->get('term') || (string) $amount !== $request->get('amount')) {
-            throw new InvalidParametersException();
-        }
     }
 }
