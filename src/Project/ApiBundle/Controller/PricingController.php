@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Project\ApiBundle\Controller;
 
-use App\Project\ApiBundle\Exception\InvalidParametersException;
 use App\Project\ApiBundle\Exception\ParameterRangeException;
 use App\Project\ApiBundle\Model\LoanApplication;
 use App\Project\ApiBundle\Money\Formatter\MoneyFormatterInterface;
