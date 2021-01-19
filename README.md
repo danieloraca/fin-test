@@ -18,15 +18,11 @@ The json response is using PoundFormatter to render the `amount` and `fee` in mo
 
 
 ## Exceptions
-There are two exceptions that can be thrown such as
-1. In case one of the parameters used to call the API has an invalid type the following exception will be thrown:
-```injectablephp
-InvalidParametersException
-```
-2. When `{term}` parameter is not `12` or `24` or `{amount}` is not in 1000 - 20000 range the following exception will be thrown:
+1. When `{amount}` is not in 1000 - 20000 range the following exception will be thrown:
 ```injectablephp
 ParameterRangeException
 ```
+2. If the API doesn't receive any of the parameters, or the type is different than the types defined in routes the `ApiExceptionListener` will kick in. 
 
 
 ## Command lines
