@@ -23,19 +23,6 @@ class FeeCalculatorTest extends TestCase
         $this->feeCalculator = new FeeCalculator($this->loanApplication);
     }
 
-    public function testWhenTermNotInRange(): void
-    {
-        $term = 1;
-        $amount = 1000;
-        $loanApplication = new LoanApplication($term, $amount);
-
-        $this->feeCalculator = new FeeCalculator($loanApplication);
-
-        $this->expectException(ParameterRangeException::class);
-
-        $this->feeCalculator->calculate($loanApplication);
-    }
-
     public function testWhenAmountNotInRange(): void
     {
         $term = 12;
