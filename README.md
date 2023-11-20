@@ -6,6 +6,7 @@ path: /api/{term}/{amount}
 - First parameter accepts `12` or `24`
 - Second parameter accepts float values from `1000` to `20000`
 
+
 The API call returns json response in the following format:
 ```json
 {
